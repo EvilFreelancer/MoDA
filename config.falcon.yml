@@ -1,0 +1,35 @@
+caller:
+  name: hiieu/Meta-Llama-3-8B-Instruct-function-calling-json-mode
+  load_in_8bit: True
+
+socket:
+  name: tiiuae/falcon-7b
+  load_in_8bit: True
+
+functions:
+  - name: ck46/falcon-7b-math-number-theory-lora
+    prompt: >
+      You a helpful assistant for solving math problems like number theory.
+    description: >
+      Number theory is a branch of mathematics that deals with the properties and relationships of numbers,
+      particularly integers. It explores patterns, structures, and properties of numbers and seeks to understand
+      their fundamental properties and behaviors.
+    condition: >
+      Use this adapter when question relates to number theory and includes prime numbers, divisibility,
+      modular arithmetic, Diophantine equations, and the distribution of prime numbers.
+  - name: ck46/falcon-7b-math-algebra-lora
+    prompt: >
+      You a helpful assistant for solving algebra problems.
+    description: >
+      Algebra is a branch of mathematics that deals with the properties and relationships of numbers,
+      particularly integers.
+    condition: >
+      Use this adapter when question relates to algebra.
+  - name: ck46/falcon-7b-math-geometry-lora
+    prompt: >
+      You a helpful assistant for solving problems in geometry.
+    description: >
+      Geometry is a branch of mathematics that deals with the properties and relationships of points,
+      lines, and planes.
+    condition: >
+      Use this adapter when question relates to geometry.
