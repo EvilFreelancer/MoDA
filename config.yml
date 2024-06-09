@@ -1,4 +1,4 @@
-caller:
+router:
   name: hiieu/Meta-Llama-3-8B-Instruct-function-calling-json-mode
   load_in_8bit: True
 
