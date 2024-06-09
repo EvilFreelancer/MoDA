@@ -7,6 +7,8 @@ queries.
 
 [Русский](./README.md) | **English**
 
+![moda schema](./assets/moda-schema.png)
+
 ## Features
 
 * **Dynamic Adapter Selection** - automatically selects the most appropriate adapter based on the
