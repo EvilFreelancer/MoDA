@@ -45,10 +45,6 @@ functions:
 
 ## Использование
 
-To understand how to use MoDA, refer to the [moda.ipynb](./moda.ipynb) Jupyter notebook in the root of this repository.
-This notebook provides a comprehensive example of loading models, initializing a conversation, handling function calls,
-and dynamically switching between different adapters to process user queries efficiently.
-
 Для того чтобы понять, как использовать MoDA, обратитесь к Jupyter-блокноту [moda.ipynb](./moda.ipynb), что в корне
 репозитория. Этот ноутбук предоставляет исчерпывающий пример загрузки моделей, инициализации разговора,
 обработки вызовов функций и динамического переключения между различными адаптерами для эффективной обработки
