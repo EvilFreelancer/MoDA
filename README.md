@@ -57,7 +57,6 @@ functions:
 ## Цитирование
 
 ```
-
 @misc{moda2024sources,
     title={Mixture of dynamically connected adapters (MoDA)}, 
     author={Pavel Rykov},
