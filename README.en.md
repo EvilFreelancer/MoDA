@@ -51,3 +51,13 @@ and dynamically switching between different adapters to process user queries eff
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+
+## Citation
+
+```
+@misc{moda2024sources,
+    title={Mixture of dynamically connected adapters (MoDA)}, 
+    author={Pavel Rykov},
+    year={2024}
+}
+```
