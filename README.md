@@ -25,13 +25,15 @@
 MoDA использует файл `config.yml` для указания моделей и адаптеров. Ниже представлена схема конфигурационного файла.
 
 ```yaml
-caller:
+router:
   name: <model_name>
-  load_in_8bit: <True/False>
+  load_in_4bit: <True/False> # False по умолчанию
+  load_in_8bit: <True/False> # False по умолчанию
 
 socket:
   name: <model_name>
-  load_in_8bit: <True/False>
+  load_in_4bit: <True/False> # False по умолчанию
+  load_in_8bit: <True/False> # False по умолчанию
 
 functions:
   - name: <adapter_name>
