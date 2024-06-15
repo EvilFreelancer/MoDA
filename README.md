@@ -7,7 +7,7 @@
 
 **Русский** | [English](./README.en.md)
 
-![moda schema](./assets/moda-schema.png)
+![moda schema](./assets/moda-schema-v2.png)
 
 ## Особенности
 
