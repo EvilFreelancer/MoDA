@@ -7,7 +7,7 @@ queries.
 
 [Русский](./README.md) | **English**
 
-![moda schema](./assets/moda-schema.png)
+![moda schema](./assets/moda-schema-v2.png)
 
 ## Features
 

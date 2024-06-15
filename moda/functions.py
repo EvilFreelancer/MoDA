@@ -9,25 +9,33 @@ logger = get_logger()
 def get_functions_metadata(functions) -> list:
     functions_metadata = []
     for function in functions:
-        functions_metadata.append({
+        function_metadata = {
             "type": "function",
             "function": {
                 "name": function["name"],
-                "description": function["description"] + function["condition"],
+                "description": function["description"] + "\n" + function["condition"],
                 "parameters": {
                     "type": "object",
                     "properties": {
-                        "question": {
+                        "name": {
                             "type": "string",
-                            "description": "Text of question which user asked"
+                            "description": "Name of function call"
                         }
                     },
                     "required": [
-                        "question"
+                        "name"
                     ]
                 }
             }
-        })
+        }
+
+        if 'examples' in function:
+            function_metadata["function"]["examples"] = function["examples"]
+
+        if 'keywords' in function:
+            function_metadata["function"]["keywords"] = ', '.join(function["keywords"])
+
+        functions_metadata.append(function_metadata)
     return functions_metadata
 
 

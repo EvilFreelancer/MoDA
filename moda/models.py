@@ -4,14 +4,14 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from peft import PeftModel
 
 
-def load_model(model_name, load_in_4bit=False, load_in_8bit=False):
+def load_model(config):
     quantization_config = BitsAndBytesConfig(
-        load_in_8bit=load_in_8bit,
-        load_in_4bit=load_in_4bit,
+        load_in_8bit=config['load_in_8bit'] if 'load_in_8bit' in config else False,
+        load_in_4bit=config['load_in_4bit'] if 'load_in_4bit' in config else False,
         llm_int8_enable_fp32_cpu_offload=True
     )
-    model = AutoModelForCausalLM.from_pretrained(model_name, quantization_config=quantization_config)
-    tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
+    model = AutoModelForCausalLM.from_pretrained(config['name'], quantization_config=quantization_config)
+    tokenizer = AutoTokenizer.from_pretrained(config['name'], use_fast=False)
     return model, tokenizer
 
 
@@ -63,6 +63,7 @@ def trigger_model(input_ids, terminators, model, tokenizer):
         do_sample=True,
         temperature=0.6,
         top_p=0.9,
+        top_k=20,
     )
     response = outputs[0][input_ids.shape[-1]:]
     return tokenizer.decode(response, skip_special_tokens=True)

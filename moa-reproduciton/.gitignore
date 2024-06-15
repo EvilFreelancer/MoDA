@@ -1,2 +1,3 @@
-/training_output/
-/final_adapter
+/training_output*
+/final_adapter*
+/venv/
