@@ -5,13 +5,25 @@ from peft import PeftModel
 
 
 def load_model(config):
-    quantization_config = BitsAndBytesConfig(
-        load_in_8bit=config['load_in_8bit'] if 'load_in_8bit' in config else False,
-        load_in_4bit=config['load_in_4bit'] if 'load_in_4bit' in config else False,
-        llm_int8_enable_fp32_cpu_offload=True
-    )
-    model = AutoModelForCausalLM.from_pretrained(config['name'], quantization_config=quantization_config)
-    tokenizer = AutoTokenizer.from_pretrained(config['name'], use_fast=False)
+    # quantization_config = BitsAndBytesConfig(
+    #     load_in_8bit=config['load_in_8bit'] if 'load_in_8bit' in config else False,
+    #     load_in_4bit=config['load_in_4bit'] if 'load_in_4bit' in config else False,
+    #     llm_int8_enable_fp32_cpu_offload=True
+    # )
+    # model = AutoModelForCausalLM.from_pretrained(
+    #     config['name'],
+    #     # quantization_config=quantization_config,
+    #     trust_remote_code=True
+    # )
+    # tokenizer = AutoTokenizer.from_pretrained(
+    #     config['name'],
+    #     use_fast=False,
+    #     trust_remote_code=True
+    # )
+    tokenizer = AutoTokenizer.from_pretrained("rodrigo-pedro/gemma-2b-function-calling", trust_remote_code=True)
+    model = AutoModelForCausalLM.from_pretrained("rodrigo-pedro/gemma-2b-function-calling", trust_remote_code=True,
+                                                 device_map="auto")
+
     return model, tokenizer
 
 
@@ -21,12 +33,36 @@ def load_adapter(base_model, adapter_name):
     return model, tokenizer
 
 
+def custom_apply_chat_template(messages, add_generation_prompt=True):
+    processed_messages = []
+    for msg in messages:
+        role = msg.get('role', 'user')
+        content = msg.get('content', '')
+        if role == 'user':
+            processed_messages.append(f"User: {content}")
+        elif role == 'system':
+            processed_messages.append(f"System: {content}")
+        elif role == 'assistant':
+            processed_messages.append(f"Assistant: {content}")
+
+    if add_generation_prompt:
+        processed_messages.append("Assistant: ")
+
+    return " ".join(processed_messages)
+
+
 def get_input_ids(tokenizer, messages):
-    return tokenizer.apply_chat_template(
-        messages,
-        add_generation_prompt=True,
-        return_tensors="pt"
-    )
+    # If tokenizer is not somthing custom and has apply_chat_template method then use it
+    if hasattr(tokenizer, 'apply_chat_template'):
+        return tokenizer.apply_chat_template(
+            messages,
+            add_generation_prompt=True,
+            return_tensors="pt"
+        )
+
+    # Otherwise let's use custom_apply_chat_template
+    processed_text = custom_apply_chat_template(messages)
+    return tokenizer(processed_text, return_tensors="pt")
 
 
 def get_adapter(name, adapters) -> str | bool:

@@ -1,3 +1,4 @@
+# hiieu/Meta-Llama-3-8B-Instruct-function-calling-json-mode
 results = [
     {'Domain': 'FINANCE', 'test size': 2000, 'Router': '97.50%'},  # 54m 57s
     {'Domain': 'MEDICINE', 'test size': 2000, 'Router': '98.25%'},  # 53m 25s
@@ -7,6 +8,12 @@ results = [
     {'Domain': 'GPT4TOOLS', 'test size': 2000, 'Router': '97.00%'},  # 52m 10s
     {'Domain': 'COT', 'test size': 2000, 'Router': '84.45%'},  # 54m 06s
     {'Domain': 'STACKOWERFLOW', 'test size': 2000, 'Router': '45.45%'},  # 58m 44s
+]
+
+# mudler/LocalAI-Llama3-8b-Function-Call-v0.2
+results = [
+    {'Domain': 'FINANCE', 'test size': 200, 'Router': '35.00%'},
+    {'Domain': 'MEDICINE', 'test size': 200, 'Router': '10.50%'}
 ]
 
 # Calculate average
